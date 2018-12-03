@@ -15,6 +15,7 @@ const rightDiv = (props) => (
         </Segment>
 </Grid.Column> )
 
+
 export default rightDiv
 
     // && props.users.map(user => user.tasks).map(user => console.log(user)) > 0
