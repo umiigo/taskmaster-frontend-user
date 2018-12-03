@@ -1,11 +1,13 @@
 {
-  "name": "frontuser",
+  "name": "todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.6.3",
+    "react-calendar": "^2.17.5",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "semantic-ui-react": "^0.83.0"
   },
   "scripts": {
     "start": "react-scripts start",
