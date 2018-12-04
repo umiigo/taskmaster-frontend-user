@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import {Button} from 'semantic-ui-react'
 
 
-export default class Button extends Component {
+export default class HAHA extends Component {
 
 
 
@@ -43,9 +44,9 @@ export default class Button extends Component {
         return (
             <div className="main">
                 <div className="upload">
-                    <button onClick={this.uploadWidget.bind(this)} className="upload-button">
-                        Add Image
-                    </button>
+                    <Button basic color='green' content='Green' onClick={this.uploadWidget.bind(this)} className="upload-button">
+                        Add Before Image
+                    </Button>
                 </div>
             </div>
 

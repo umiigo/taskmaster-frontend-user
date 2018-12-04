@@ -125,13 +125,9 @@ class App extends Component {
     <LoginForm enterUsername={this.enterUsername}
     findUser={this.findUser}/>
       :this.state.selectedUser.length === 1?
-       <div>
-          <Grid.Column width={16}>
-                <Segment basic>
+       <div>   
                   <MenuBar logout={this.logout}/>
-                </Segment>
-          </Grid.Column> 
-          <Grid columns={1} >
+         
             <TableDiv
               updateImage={this.updateTaskImage}
               users={this.state.users} 
@@ -141,7 +137,7 @@ class App extends Component {
               enterUsername={this.enterUsername}
               findUser={this.findUser}
               />
-          </Grid>
+
           </div>: <LoginForm enterUsername={this.enterUsername}
     findUser={this.findUser}/>
     );
