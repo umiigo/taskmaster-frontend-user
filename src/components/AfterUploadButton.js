@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'semantic-ui-react';
 
 
 export default class AfterUploadButton extends Component {
@@ -43,9 +44,9 @@ export default class AfterUploadButton extends Component {
         return (
             <div className="main">
                 <div className="upload">
-                    <button onClick={this.uploadWidget.bind(this)} className="upload-button">
+                    <Button basic color='green' content='Green'  onClick={this.uploadWidget.bind(this)} className="upload-button">
                         Add Image
-                    </button>
+                    </Button>
                 </div>
             </div>
 
