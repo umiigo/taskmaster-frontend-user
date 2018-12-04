@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Image} from 'semantic-ui-react'
-import Button from './Button'
+import BeforeUploadButton from './BeforeUploadButton'
+import AfterUploadButton from './AfterUploadButton';
 
 
 export default class taskItem  extends React.Component {
@@ -14,10 +15,15 @@ export default class taskItem  extends React.Component {
             <Table.Cell  textAlign='center'>
                     {this.props.task.beforeImage?
                     <Image avatar style={{'fontSize':15}} src={this.props.task.beforeImage} />
-                    :<Button activeTasks={this.props.activeTasks}task={this.props.task}>
-                        <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.beforeImage}></Image></Button>}
+                    :<BeforeUploadButton activeTasks={this.props.activeTasks}task={this.props.task}>
+                        <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.beforeImage}></Image></BeforeUploadButton>}
             </Table.Cell> 
-            <Table.Cell  textAlign='center'><Image  style={{'fontSize':15}} avatar src={this.props.task.afterImage}/></Table.Cell>
+            <Table.Cell  textAlign='center'>
+                    {this.props.task.afterImage?
+                    <Image avatar style={{'fontSize':15}} src={this.props.task.afterImage} />
+                    :<AfterUploadButton activeTasks={this.props.activeTasks}task={this.props.task}>
+                        <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.afterImage}></Image></AfterUploadButton>}
+            </Table.Cell>
          </Table.Row >)
     }
 

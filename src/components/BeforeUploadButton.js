@@ -9,7 +9,7 @@ export default class Button extends Component {
         url: ''
       }
 
-    updateTaskImage = (task,url) => {
+    updateBeforeTaskImage = (task,url) => {
         fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
           method: 'PUT',
           headers: {
@@ -27,13 +27,14 @@ export default class Button extends Component {
           })
       } 
 
+
     uploadWidget = () => {
         window.cloudinary.openUploadWidget({ cloud_name: 'dk2bxxflb', upload_preset: 'dupb1zlh', tags: ['xmas'] },
             (error, result) => {
                 if (result.event === "success") {
                     const url = result.info.url
                     this.setState({ url });
-                    this.updateTaskImage(this.props.task, this.state.url)
+                    this.updateBeforeTaskImage(this.props.task, this.state.url)
                     
                 }
             });
