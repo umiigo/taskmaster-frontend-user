@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button} from 'semantic-ui-react'
 
 
-export default class HAHA extends Component {
+export default class BeforeUploadImage extends Component {
 
 
 
