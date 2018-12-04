@@ -30,7 +30,8 @@ export default class AfterUploadButton extends Component {
 
 
     uploadWidget = () => {
-        window.cloudinary.openUploadWidget({ cloud_name: 'dk2bxxflb', upload_preset: 'dupb1zlh', tags: ['xmas'] },
+        window.cloudinary.openUploadWidget({ cloud_name: 'dk2bxxflb', upload_preset: 'dupb1zlh', tags: ['xmas'],
+        sources: [ 'camera'] },
             (error, result) => {
                 if (result.event === "success") {
                     const url = result.info.url
