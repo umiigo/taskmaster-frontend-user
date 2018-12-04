@@ -11,7 +11,7 @@ export default class TaskList extends React.Component {
       this.props.selectedUser.length>0?
       <div>
       <Table unstackable singleLine> 
-      <TaskListHeader/>
+      {/* <TaskListHeader/> */}
       <Table.Body>
         {this.props.filterActiveTasksByUser()
           .map(task => 

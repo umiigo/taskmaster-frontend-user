@@ -118,13 +118,6 @@ class App extends Component {
         this.setState({ activeTasks: newArray})
       })
   }
-
-
-  
-
-
-
-  
  
   render() {
     return (
