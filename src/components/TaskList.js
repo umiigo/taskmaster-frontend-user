@@ -5,19 +5,23 @@ import TaskListHeader from './TaskListHeader'
 
 
 
-const TaskList = (props) => (
-  props.selectedUser.length>0?
-  <div>
-  <Table unstackable singleLine> 
-  <TaskListHeader/>
-  <Table.Body>
-    {props.filterActiveTasksByUser()
-      .map(task => 
-        <TaskItem key={task.id} task = {task}/>)
-      }
-  </Table.Body>
-  </Table>
-  </div>:null
-)
-export default TaskList
+export default class TaskList extends React.Component {
+  render() {
+    return (
+      this.props.selectedUser.length>0?
+      <div>
+      <Table unstackable singleLine> 
+      <TaskListHeader/>
+      <Table.Body>
+        {this.props.filterActiveTasksByUser()
+          .map(task => 
+            <TaskItem activeTasks={this.props.activeTasks} updateImage={this.props.updateTaskImage} key={task.id} task = {task}/>)
+          }
+      </Table.Body>
+      </Table>
+      </div>:null
+    )
 
+
+  }
+}

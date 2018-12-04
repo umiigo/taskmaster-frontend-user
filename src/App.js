@@ -98,6 +98,7 @@ class App extends Component {
       .then(task => (this.setState({ activeTasks: [...this.state.activeTasks, task] })))
   }
 
+
   deactivateTask = (task) => {
     fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
       method: 'PUT',
@@ -115,6 +116,8 @@ class App extends Component {
         this.setState({ activeTasks: newArray})
       })
   }
+
+
   
 
 
@@ -135,6 +138,7 @@ class App extends Component {
           </Grid.Column> 
           <Grid columns={1} >
             <TableDiv
+              updateImage={this.updateTaskImage}
               users={this.state.users} 
               activeTasks={this.state.activeTasks}
               selectedUser={this.state.selectedUser}

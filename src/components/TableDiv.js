@@ -11,6 +11,7 @@ const rightDiv = (props) => (
                  filterActiveTasksByUser={props.filterActiveTasksByUser}
                  activeTasks={props.activeTasks}
                  deactivateTask={props.deactivateTask}
+                 updateImage={props.updateTaskImage}
                  />
         </Segment>
 </Grid.Column> )
