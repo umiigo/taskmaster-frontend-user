@@ -19,13 +19,12 @@ export default class taskItem  extends React.Component {
                         <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.beforeImage}></Image></BeforeUploadButton>}
             </Table.Cell> 
             <Table.Cell  textAlign='center'>
-                    {this.props.task.afterImage?
-                    <Image avatar style={{'fontSize':15}} src={this.props.task.afterImage} />
-                    :<AfterUploadButton activeTasks={this.props.activeTasks}task={this.props.task}>
-                        <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.afterImage}></Image></AfterUploadButton>}
+                    {this.props.task.beforeImage&&!this.props.task.afterImage?
+                    <AfterUploadButton activeTasks={this.props.activeTasks}task={this.props.task}>
+                        <Image cloudName="demo" publicId="sample" width="300" crop="scale" style={{'fontSize':15}} avatar src={this.props.task.afterImage}></Image></AfterUploadButton>
+                    :<Image avatar style={{'fontSize':15}} src={this.props.task.afterImage} />}
             </Table.Cell>
          </Table.Row >)
     }
 
 } 
-// onClick={props.updateTaskImage(props.task)}
