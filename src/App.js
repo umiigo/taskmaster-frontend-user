@@ -20,6 +20,7 @@ class App extends Component {
 
   //Get All Users And Filter By Active User 
   componentDidMount() {
+    this.interval = setInterval(() => {
     fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
       .then(resp => resp.json())
       .then(data => {
@@ -29,9 +30,7 @@ class App extends Component {
         this.setState({ activeUsers: activeUsers })
       }
     )     
-
-
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
+      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
       .then(resp => resp.json())
       .then(data => {
         data.map(task => task.selected = false)
@@ -40,10 +39,13 @@ class App extends Component {
         this.setState({ activeTasks: activeTasks })
       }
     )     
+    },3000)
+    }
+
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
-
-
-    
 
   
 
