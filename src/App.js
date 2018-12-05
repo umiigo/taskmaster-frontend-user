@@ -15,7 +15,8 @@ class App extends Component {
     activeUsers: [],
     selectedUserTasks:[],
     activeTasks: [],
-    uservalue: []
+    emailvalue:'',
+    passwordvalue:''
   }
 
   //Get All Users And Filter By Active User 
@@ -52,8 +53,14 @@ class App extends Component {
   //USER FUNCTIONS
 
 
+
+
   enterUsername = (event) => {
   this.setState({ emailvalue: event.target.value })}
+
+  enterPassword = (event) => {
+    this.setState({ passwordvalue: event.target.value })}
+  
 
   findUser = (event) => {
     event.preventDefault()
@@ -62,7 +69,39 @@ class App extends Component {
     this.setState({ selectedUser: [foundUser]}) 
   }
 
-  logout = () => this.setState({ selectedUser: false  });
+  signin = username => this.setState({ username  });
+  signout= () => this.setState({ username: ''  });
+
+  handleSignin = () =>{
+    return fetch('http://localhost:3000/api/v1/signin', {
+	  method: 'POST',
+	  headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: this.state.emailvalue,
+      password: this.state.passwordvalue
+    })})
+    .then(resp=>resp.json())
+    .then(data =>{
+      if(data.error){
+        alert('incorrect')}
+        else{
+          return fetch('http://localhost:3000/api/v1/signin', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              email: this.state.emailvalue,
+              password: this.state.passwordvalue
+            })})
+            .then(resp=>resp.json())
+            .then(data=> this.setState({ selectedUser:[data]  }))
+            
+
+        }
+    })
+  }
+
+
+  // logout = () => this.setState({ selectedUser: false  });
 
   //MIXED 
 
@@ -123,7 +162,8 @@ class App extends Component {
     return (
     this.state.selectedUser.length === 0?
     <LoginForm enterUsername={this.enterUsername}
-    findUser={this.findUser}/>
+    enterPassword={this.enterPassword}
+    handleSignin={this.handleSignin}/>
       :this.state.selectedUser.length === 1?
        <div>   
                   <MenuBar logout={this.logout}/>
