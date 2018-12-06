@@ -11,7 +11,7 @@ export default class BeforeUploadImage extends Component {
       }
 
     updateBeforeTaskImage = (task,url) => {
-        fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
+        fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks/${task.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

@@ -31,7 +31,6 @@ export default class MenuBar extends Component {
           <Menu.Menu position='right'>
             <Menu.Item
               name='logout'
-              active={activeItem === 'logout'}
               onClick={this.props.logout}
             />
           </Menu.Menu>

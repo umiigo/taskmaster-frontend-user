@@ -22,7 +22,7 @@ class App extends Component {
   //Get All Users And Filter By Active User 
   componentDidMount() {
     this.interval = setInterval(() => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/users`)
       .then(resp => resp.json())
       .then(data => {
         data.map(user => user.selected = false)
@@ -31,7 +31,7 @@ class App extends Component {
         this.setState({ activeUsers: activeUsers })
       }
     )     
-      fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
+      fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks`)
       .then(resp => resp.json())
       .then(data => {
         data.map(task => task.selected = false)
@@ -70,10 +70,10 @@ class App extends Component {
   }
 
   signin = username => this.setState({ username  });
-  signout= () => this.setState({ username: ''  });
+  logout = () => this.setState({ selectedUser: false  });
 
   handleSignin = () =>{
-    return fetch('http://localhost:3000/api/v1/signin', {
+    return fetch('https://hidden-thicket-33143.herokuapp.com/api/v1/signin', {
 	  method: 'POST',
 	  headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -85,7 +85,7 @@ class App extends Component {
       if(data.error){
         alert('incorrect')}
         else{
-          return fetch('http://localhost:3000/api/v1/signin', {
+          return fetch('https://hidden-thicket-33143.herokuapp.com/api/v1/signin', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -100,8 +100,6 @@ class App extends Component {
     })
   }
 
-
-  // logout = () => this.setState({ selectedUser: false  });
 
   //MIXED 
 
@@ -121,7 +119,7 @@ class App extends Component {
   }
 
   postNewTaskToServerAndPage = () => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`, {
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -141,7 +139,7 @@ class App extends Component {
 
 
   deactivateTask = (task) => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks/${task.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -179,7 +177,8 @@ class App extends Component {
               />
 
           </div>: <LoginForm enterUsername={this.enterUsername}
-    findUser={this.findUser}/>
+    enterPassword={this.enterPassword}
+    handleSignin={this.handleSignin}/>
     );
   }
 }
