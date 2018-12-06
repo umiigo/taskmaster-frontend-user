@@ -1,23 +1,18 @@
 import React from 'react'
 import TaskItem from './TaskItem'
-import { Table} from 'semantic-ui-react'
-import TaskListHeader from './TaskListHeader'
+import { Card } from 'semantic-ui-react';
 
 
 
-const TaskList = (props) => (
-  props.selectedUser.length>0?
-  <div>
-  <Table unstackable singleLine> 
-  <TaskListHeader/>
-  <Table.Body>
-    {props.filterActiveTasksByUser()
-      .map(task => 
-        <TaskItem key={task.id} task = {task}/>)
-      }
-  </Table.Body>
-  </Table>
-  </div>:null
-)
-export default TaskList
-
+export default class TaskList extends React.Component {
+  render() {
+    return (
+      <Card.Group itemsPerRow={1}>
+        {this.props.selectedUser.length>0?
+          this.props.filterActiveTasksByUser()
+            .map(task => 
+              <TaskItem activeTasks={this.props.activeTasks} updateImage={this.props.updateTaskImage} key={task.id} task = {task}/>):null}
+        </Card.Group>
+    )
+            }
+}

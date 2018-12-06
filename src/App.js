@@ -15,12 +15,14 @@ class App extends Component {
     activeUsers: [],
     selectedUserTasks:[],
     activeTasks: [],
-    uservalue: []
+    emailvalue:'',
+    passwordvalue:''
   }
 
   //Get All Users And Filter By Active User 
   componentDidMount() {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/users`)
+    this.interval = setInterval(() => {
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/users`)
       .then(resp => resp.json())
       .then(data => {
         data.map(user => user.selected = false)
@@ -29,9 +31,7 @@ class App extends Component {
         this.setState({ activeUsers: activeUsers })
       }
     )     
-
-
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
+      fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks`)
       .then(resp => resp.json())
       .then(data => {
         data.map(task => task.selected = false)
@@ -40,27 +40,27 @@ class App extends Component {
         this.setState({ activeTasks: activeTasks })
       }
     )     
-  }
-
-
-  componentDidUpdate(){
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`)
-    .then(resp => resp.json())
-    .then(data => {
-      data.map(task => task.selected = false)
-      this.setState({ tasks: [...data] })
-      let activeTasks = this.state.tasks.filter(task=>task.is_active)
-      this.setState({ activeTasks: activeTasks })
+    },3000)
     }
-  )  
 
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
+
+  
 
   //USER FUNCTIONS
 
 
+
+
   enterUsername = (event) => {
   this.setState({ emailvalue: event.target.value })}
+
+  enterPassword = (event) => {
+    this.setState({ passwordvalue: event.target.value })}
+  
 
   findUser = (event) => {
     event.preventDefault()
@@ -69,7 +69,37 @@ class App extends Component {
     this.setState({ selectedUser: [foundUser]}) 
   }
 
+  signin = username => this.setState({ username  });
   logout = () => this.setState({ selectedUser: false  });
+
+  handleSignin = () =>{
+    return fetch('https://hidden-thicket-33143.herokuapp.com/api/v1/signin', {
+	  method: 'POST',
+	  headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      email: this.state.emailvalue,
+      password: this.state.passwordvalue
+    })})
+    .then(resp=>resp.json())
+    .then(data =>{
+      if(data.error){
+        alert('incorrect')}
+        else{
+          return fetch('https://hidden-thicket-33143.herokuapp.com/api/v1/signin', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              email: this.state.emailvalue,
+              password: this.state.passwordvalue
+            })})
+            .then(resp=>resp.json())
+            .then(data=> this.setState({ selectedUser:[data]  }))
+            
+
+        }
+    })
+  }
+
 
   //MIXED 
 
@@ -89,7 +119,7 @@ class App extends Component {
   }
 
   postNewTaskToServerAndPage = () => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks`, {
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,8 +137,9 @@ class App extends Component {
       .then(task => (this.setState({ activeTasks: [...this.state.activeTasks, task] })))
   }
 
+
   deactivateTask = (task) => {
-    fetch(`https://radiant-forest-10458.herokuapp.com/api/v1/tasks/${task.id}`, {
+    fetch(`https://hidden-thicket-33143.herokuapp.com/api/v1/tasks/${task.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -124,26 +155,19 @@ class App extends Component {
         this.setState({ activeTasks: newArray})
       })
   }
-  
-
-
-
-  
  
   render() {
     return (
     this.state.selectedUser.length === 0?
     <LoginForm enterUsername={this.enterUsername}
-    findUser={this.findUser}/>
+    enterPassword={this.enterPassword}
+    handleSignin={this.handleSignin}/>
       :this.state.selectedUser.length === 1?
-       <div>
-          <Grid.Column width={16}>
-                <Segment basic>
+       <div>   
                   <MenuBar logout={this.logout}/>
-                </Segment>
-          </Grid.Column> 
-          <Grid columns={1} >
+         
             <TableDiv
+              updateImage={this.updateTaskImage}
               users={this.state.users} 
               activeTasks={this.state.activeTasks}
               selectedUser={this.state.selectedUser}
@@ -151,9 +175,10 @@ class App extends Component {
               enterUsername={this.enterUsername}
               findUser={this.findUser}
               />
-          </Grid>
+
           </div>: <LoginForm enterUsername={this.enterUsername}
-    findUser={this.findUser}/>
+    enterPassword={this.enterPassword}
+    handleSignin={this.handleSignin}/>
     );
   }
 }

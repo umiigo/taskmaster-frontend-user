@@ -21,11 +21,11 @@ const LoginForm = (props) => (
        Log-in to your account
         </Header>
 
-        <Form onChange={props.enterUsername} onSubmit={props.findUser} size='large'>
+        <Form onSubmit={props.handleSignin} size='large'>
           <Segment stacked>
 
-            <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-            <Form.Input
+            <Form.Input onChange={props.enterUsername}  fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+            <Form.Input onChange={props.enterPassword}
               fluid
               icon='lock'
               iconPosition='left'
